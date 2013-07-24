@@ -17,4 +17,4 @@ define i32 @main() {   ; i32()*
 
 ; Named metadata
 !1 = metadata !{i32 42}
-!foo = !{!1, null}
+!foo = !{!1, !1}
