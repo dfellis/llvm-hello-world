@@ -1,22 +1,37 @@
-	.section	__TEXT,__text,regular,pure_instructions
-	.globl	_main
-	.align	4, 0x90
-_main:                                  ## @main
-	.cfi_startproc
-## BB#0:
-	pushq	%rax
-Ltmp1:
-	.cfi_def_cfa_offset 16
-	leaq	L_.str(%rip), %rdi
-	callq	_puts
+	.text
+	.def	 main;
+	.scl	2;
+	.type	32;
+	.endef
+	.globl	main                    # -- Begin function main
+	.p2align	4, 0x90
+main:                                   # @main
+.seh_proc main
+# %bb.0:
+	pushq	%rbp
+	.seh_pushreg 5
+	pushq	%rsi
+	.seh_pushreg 6
+	subq	$40, %rsp
+	.seh_stackalloc 40
+	leaq	32(%rsp), %rbp
+	.seh_setframe 5, 32
+	.seh_endprologue
+	leaq	.L.str(%rip), %rsi
+	callq	__main
+	movq	%rsi, %rcx
+	callq	puts
 	xorl	%eax, %eax
-	popq	%rdx
-	ret
-	.cfi_endproc
+	addq	$40, %rsp
+	popq	%rsi
+	popq	%rbp
+	retq
+	.seh_handlerdata
+	.text
+	.seh_endproc
+                                        # -- End function
+	.section	.rdata,"dr"
+.L.str:                                 # @.str
+	.asciz	"hello world\n"
 
-	.section	__TEXT,__cstring,cstring_literals
-L_.str:                                 ## @.str
-	.asciz	 "hello world\n"
 
-
-.subsections_via_symbols

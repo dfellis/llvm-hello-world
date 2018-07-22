@@ -6,15 +6,15 @@
 declare i32 @puts(i8* nocapture) nounwind
 
 ; Definition of main function
-define i32 @main() {   ; i32()*
-      ; Convert [13 x i8]* to i8  *...
-        %cast210 = getelementptr [13 x i8]* @.str, i64 0, i64 0
+define i32 @main() { ; i32()*
+    ; Convert [13 x i8]* to i8  *...
+    %cast210 = getelementptr [13 x i8],[13 x i8]* @.str, i64 0, i64 0
 
-          ; Call puts function to write out the string to stdout.
-            call i32 @puts(i8* %cast210)
-              ret i32 0
+    ; Call puts function to write out the string to stdout.
+    call i32 @puts(i8* %cast210)
+    ret i32 0
 }
 
 ; Named metadata
-!1 = metadata !{i32 42}
-!foo = !{!1, !1}
+!0 = !{i32 42, null, !"string"}
+!foo = !{!0}
